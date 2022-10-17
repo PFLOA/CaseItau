@@ -14,6 +14,12 @@ Banco de dados SQL Server 2017, utilizado para gerir os bancos de dados para Cat
 
 Serviço para a centralização de Log de Erro, as duas api citadas sempre que uma exceção é gerada dispara log para está ferramenta de forma independente.
 
+Determinados prints foram tirados com erros que ocorreram no desenvolvimento da api, e foram coletados por meio do graylog:
+
+![Handler Erro](https://github.com/PFLOA/CaseItau/blob/main/img/HandlerError.png)
+![Context Erro](https://github.com/PFLOA/CaseItau/blob/main/img/LogErrorGeral.png)
+![Command Erro](https://github.com/PFLOA/CaseItau/blob/main/img/LogPrint.png)
+
 ### prometheus
 
 Serviço que faz a captação de metricas geradas pelas api, por meio do endpoint /metrics.
