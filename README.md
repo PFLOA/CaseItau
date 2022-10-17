@@ -26,7 +26,7 @@ Serviço que faz a captação de metricas geradas pelas api, por meio do endpoin
 
 Determinados prints foram tirados de 3 Gráficos, que mostrem em tempo real a quantidade de execução, a latência e quantidade de erros das api criadas.
 
-Através de outra ferramenta chamada Grafana, foram possíveis coletar informações:
+Através de outra ferramenta chamada Grafana, foram possíveis coletar informações e criar dois Dashboard:
 
 CatApi Métricas:
 
