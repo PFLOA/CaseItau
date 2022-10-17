@@ -1,0 +1,94 @@
+version: '3'
+
+services:
+  case-itau-server:
+    build: ./sqlserver
+    ports:
+      - "1433:1433"
+    volumes:
+      - ./data/volumes/sqlserver:/var/opt/mssql/data
+  case-itau-twitter-api:
+    build: ./A4S.CaseItau.Api
+    environment:
+      DbServer: "case-itau-server"
+      DbPort: "1433"
+      DbUser: "SA"
+      Password: "7539514862Pp*"
+      Database: "case_itau_twitter_db"
+    ports: 
+      - "8090:80"
+  case-itau-cat-api:
+    build: ./A4S.CaseItau.CatApi
+    environment:
+      DbServer: "case-itau-server"
+      DbPort: "1433"
+      DbUser: "SA"
+      Password: "7539514862Pp*"
+      Database: "case_itau_cat_db"
+    ports: 
+      - "8080:80"
+  mongo:
+    image: mongo:4.2
+    volumes:
+      - mongo_data:/data/db
+  elasticsearch:
+    image: elasticsearch:7.17.6
+    volumes:
+      - es_data:/usr/share/elasticsearch/data
+    environment:
+      - http.host=0.0.0.0
+      - transport.host=localhost
+      - network.host=0.0.0.0
+      - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
+    deploy:
+      resources:
+        limits: 
+          memory: 1g
+  graylog:
+    image: graylog/graylog:4.3
+    volumes:
+      - ./graylog:/usr/share/graylog/data
+      - graylog_data:/usr/share/graylog/data
+    environment: 
+      - GRAYLOG_PASSWORD_SECRET=8dc04cd39341f7dca7eec92601bfba4b5d12334cee07740529a994ed
+      - GRAYLOG_ROOT_PASSWORD_SHA2=8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918
+      - GRAYLOG_HTTP_EXTERNAL_URI=http://localhost:9000/
+    entrypoint: /usr/bin/tini -- wait-for-it elasticsearch:9200 -- /docker-entrypoint.sh
+    restart: always
+    depends_on:
+      - mongo
+      - elasticsearch
+    ports:
+      - 9000:9000
+      - 1514:1514
+      - 1514:1514/udp
+      - 12201:12201
+      - 12201:12201/udp
+  prometheus:
+    image: prom/prometheus:v2.21.0
+    ports:
+      - 9090:9090
+    volumes:
+      - ./prometheus:/etc/prometheus
+      - prometheus-data:/prometheus
+    command: --web.enable-lifecycle  --config.file=/etc/prometheus/prometheus.yml
+  grafana:
+    image: grafana/grafana-enterprise
+    ports:
+      - 3001:3000
+    depends_on:
+      - prometheus
+    volumes:
+      - ./grafana:/var/lib/grafana
+      - grafana-storage:/var/lib/grafana
+
+volumes:
+  grafana-storage:
+  mongo_data:
+  es_data:
+  graylog_data:
+  prometheus-data:
