@@ -24,6 +24,18 @@ Determinados prints foram tirados com erros que ocorreram no desenvolvimento da 
 
 Serviço que faz a captação de metricas geradas pelas api, por meio do endpoint /metrics.
 
+Determinados prints foram tirados de 3 Gráficos, que mostrem em tempo real a quantidade de execução, a latência e quantidade de erros das api criadas.
+
+Através de outra ferramenta chamada Grafana, foram possíveis coletar informações:
+
+CatApi Métricas:
+
+![Print](https://github.com/PFLOA/CaseItau/blob/main/img/CatApiMetrics.png)
+
+TwitterApi Métricas:
+
+![Print](https://github.com/PFLOA/CaseItau/blob/main/img/TwitterApiMetrics.png)
+
 ### case-itau-twitter-api
 
 #### Objetivo
