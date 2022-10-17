@@ -4,6 +4,8 @@ O projeto visa a criação de uma arquitetura limpa, e construida com o objetivo
 
 Foi escolhido o Docker como ferramenta para criação de conteiners, criando assim um ambiente com microserviços rodando de forma separada.
 
+Para rodar a aplicação é necessário possuir o docker instalado e configurado, de acordo com cada sistema operacional, em seguida é necessário ir até a pasta A4S.CaseItau e abrir o terminal de sua preferência, e assim rodar o comando "docker-compose up --build", as imagens serão baixadas automaticamente e os conteiners gerados, com suas respectivas configurações.
+
 O projeto possui 7 containers:
 
 ### case-itau-server 
@@ -76,5 +78,23 @@ Foi utilizado GrayLog para a centralização de Log de Erro, disponível pela UR
 
 ### Estrutura de Pastas e Técnicas utilizadas para desenvolvimento das API
 
+Ambas as API possuem a mesma estrutura de pastas:
 
+- :file_folder: 1 - Api
+    - :computer: A4S.CaseItau.Api : Api propriamente dita com todas as controllers possuindo os endpoints necessários para aplicação
+- :file_folder: 2 - Application 
+    - :books: A4S.CaseItau.Application : Camada de negócio aqui estão abstraidas todas as regras de negócio da aplicação, utilizando Mediator como principal Design Pattern
+- :file_folder: 3 - Domain 
+    - :books: A4S.CaseItau.Domain : Camada de dominio, na qual possui todas as entidades e interfaces necessárias para o pleno funcionamento da aplicação.
+- :file_folder: 4 - Infra 
+    - :books: A4S.CaseItau.Infra : Camada de infraestrutura, esta camada possui a responsabilidade de gerir o acesso aos dados, que estão no servidor, utilizando o Entiy Framework Core como ORM e diversos design patterns, dentre eles Repository e Builder.
+- :file_folder: 5 - Core 
+    - :books: A4S.CaseItau.Core : Camada possuindo classes e métodos genéricos para abstração e preveni repetição de código.
+    - :books: A4S.CaseItau.Http : Camada que possui acesso a api externa, separada das outras regras.
+    - :books: A4S.CaseItau.Logging : Camada que visa a configuração das ferramentas de log
+    - :books: A4S.CaseItau.Injection : possui todas as classes responsaveis por gerir a Injeção de Dependencia dos serviços
+- :file_folder: 6 - Teste
+    - :books: A4S.CaseItau.Teste : Camada de testes unitários da aplicação
     
+Todo o projeto seguem o SOLID e POO, para a codificação de sua arquitetura.
+
