@@ -89,7 +89,7 @@ Ambas as API possuem a mesma estrutura de pastas:
 - :file_folder: 4 - Infra 
     - :books: A4S.CaseItau.Infra : Camada de infraestrutura, esta camada possui a responsabilidade de gerir o acesso aos dados, que estão no servidor, utilizando o Entiy Framework Core como ORM e diversos design patterns, dentre eles Repository e Builder.
 - :file_folder: 5 - Core 
-    - :books: A4S.CaseItau.Core : Camada possuindo classes e métodos genéricos para abstração e preveni repetição de código.
+    - :books: A4S.CaseItau.Core : Camada possuindo classes e métodos genéricos para abstração e prevenção de repetição de código.
     - :books: A4S.CaseItau.Http : Camada que possui acesso a api externa, separada das outras regras.
     - :books: A4S.CaseItau.Logging : Camada que visa a configuração das ferramentas de log
     - :books: A4S.CaseItau.Injection : possui todas as classes responsaveis por gerir a Injeção de Dependencia dos serviços
